@@ -46,9 +46,12 @@ public class ClassGen {
                 null,    // exceptions
                 null);   // method attributes
         mv.visitCode();
-        // BEGIN (write your solution here)
-
-        // END
+        mv.visitVarInsn(Opcodes.ALOAD, 0);
+        mv.visitVarInsn(Opcodes.ILOAD, 1);
+        mv.visitVarInsn(Opcodes.ILOAD, 2);
+        mv.visitInsn(Opcodes.IADD);
+        mv.visitInsn(Opcodes.IRETURN);
+        mv.visitMaxs(2, 3);
         mv.visitEnd();
     }
 
