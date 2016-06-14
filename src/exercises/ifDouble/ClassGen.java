@@ -48,9 +48,36 @@ public class ClassGen {
                 null,    // exceptions
                 null);   // method attributes
         mv.visitCode();
-        // BEGIN (write your solution here)
+        // 1. calculate 4 * a
+        // 1.1 push "a" to stack
+        mv.visitIntInsn(Opcodes.DLOAD, 0);
+        // 1.2 push 4.0 to stack
+        mv.visitLdcInsn(4.0);
+        // 1.3 mult 4.0 * a
+        mv.visitInsn(Opcodes.DMUL);
 
-        // END
+        // 2. calculate (4 * a) * c
+        // 2.1 push c to stack
+        mv.visitIntInsn(Opcodes.DLOAD, 4);
+        // 2.2 mult (4 * a) * c
+        mv.visitInsn(Opcodes.DMUL);
+        // 2.2 save to a
+        mv.visitIntInsn(Opcodes.DSTORE, 0);
+
+        // 3. calculate b * b
+        // 3.1 push b to stack
+        mv.visitIntInsn(Opcodes.DLOAD, 2);
+        // 3.2 push b to stack
+        mv.visitIntInsn(Opcodes.DLOAD, 2);
+        // 3.2 mult b * b
+        mv.visitInsn(Opcodes.DMUL);
+
+        // 4. substract b * b - (4 * a * c)
+        // 4. load (4 * a * c)
+        mv.visitIntInsn(Opcodes.DLOAD, 0);
+        mv.visitInsn(Opcodes.DSUB);
+        mv.visitInsn(Opcodes.DRETURN);
+        mv.visitMaxs(4, 6);
         mv.visitEnd();
     }
 
@@ -62,9 +89,24 @@ public class ClassGen {
                 null);    // method attributes
         mv.visitCode();
         final Label elseLable = new Label();
-        // BEGIN (write your solution here)
+        mv.visitIntInsn(Opcodes.DLOAD, 0);
+        mv.visitInsn(Opcodes.DCONST_0);
+        // compare variable with 0
+        mv.visitInsn(Opcodes.DCMPL);
+        // compare result of double comparation with 0
+        mv.visitJumpInsn(Opcodes.IFLT, elseLable);
 
-        // END
+        // if the result of comparation has been greate then 0 then the values if postitive
+        mv.visitIntInsn(Opcodes.DLOAD, 0);
+        mv.visitInsn(Opcodes.DRETURN);
+
+        // if the result of comparation has been less then 0 then the values if negative
+        mv.visitLabel(elseLable);
+        mv.visitIntInsn(Opcodes.DLOAD, 0);
+        mv.visitInsn(Opcodes.DNEG);
+        mv.visitInsn(Opcodes.DRETURN);
+
+        mv.visitMaxs(4, 2);
         mv.visitEnd();
     }
 
