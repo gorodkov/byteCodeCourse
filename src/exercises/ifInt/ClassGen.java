@@ -49,9 +49,15 @@ public class ClassGen {
                 null);   // method attributes
         mv.visitCode();
         final Label elseLabel = new Label();
-        // BEGIN (write your solution here)
-
-        // END
+        mv.visitVarInsn(Opcodes.ILOAD, 0);
+        mv.visitVarInsn(Opcodes.ILOAD, 1);
+        mv.visitJumpInsn(Opcodes.IF_ICMPGE, elseLabel);
+        mv.visitVarInsn(Opcodes.ILOAD, 0);
+        mv.visitInsn(Opcodes.IRETURN);
+        mv.visitLabel(elseLabel);
+        mv.visitVarInsn(Opcodes.ILOAD, 1);
+        mv.visitInsn(Opcodes.IRETURN);
+        mv.visitMaxs(2, 2);
         mv.visitEnd();
     }
 
@@ -64,9 +70,24 @@ public class ClassGen {
         mv.visitCode();
         final Label elseLabel = new Label();
         final Label elseLabel2 = new Label();
-        // BEGIN (write your solution here)
-
-        // END
+        mv.visitVarInsn(Opcodes.ILOAD, 0);
+        mv.visitVarInsn(Opcodes.ILOAD, 1);
+        mv.visitJumpInsn(Opcodes.IF_ICMPGT, elseLabel);
+        mv.visitVarInsn(Opcodes.ILOAD, 0);
+        mv.visitVarInsn(Opcodes.ILOAD, 2);
+        mv.visitJumpInsn(Opcodes.IF_ICMPGT, elseLabel);
+        mv.visitVarInsn(Opcodes.ILOAD, 0);
+        mv.visitInsn(Opcodes.IRETURN);
+        mv.visitLabel(elseLabel);
+        mv.visitVarInsn(Opcodes.ILOAD, 1);
+        mv.visitVarInsn(Opcodes.ILOAD, 2);
+        mv.visitJumpInsn(Opcodes.IF_ICMPGT, elseLabel3);
+        mv.visitVarInsn(Opcodes.ILOAD, 1);
+        mv.visitInsn(Opcodes.IRETURN);
+        mv.visitLabel(elseLabel3);
+        mv.visitVarInsn(Opcodes.ILOAD, 2);
+        mv.visitInsn(Opcodes.IRETURN);
+        mv.visitMaxs(3, 3);
         mv.visitEnd();
     }
 
