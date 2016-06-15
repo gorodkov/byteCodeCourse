@@ -50,9 +50,31 @@ public class ClassGen {
         Label forLabel = new Label();
         Label label = new Label();
         mv.visitCode();
-        // BEGIN (write your solution here)
+        mv.visitInsn(Opcodes.ICONST_0);
+        mv.visitVarInsn(Opcodes.ISTORE, 1);
+        mv.visitInsn(Opcodes.ICONST_0);
+        mv.visitVarInsn(Opcodes.ISTORE, 2);
+        mv.visitInsn(Opcodes.ICONST_1);
+        mv.visitVarInsn(Opcodes.ISTORE, 3);
 
-        // END
+        mv.visitLabel(forLabel);
+        mv.visitVarInsn(Opcodes.ILOAD, 2);
+        mv.visitVarInsn(Opcodes.ILOAD, 0);
+        mv.visitJumpInsn(Opcodes.IF_ICMPGE, label);
+
+        mv.visitVarInsn(Opcodes.ILOAD, 1);
+        mv.visitVarInsn(Opcodes.ILOAD, 2);
+        mv.visitInsn(Opcodes.IADD);
+        mv.visitVarInsn(Opcodes.ILOAD, 3);
+        mv.visitInsn(Opcodes.IADD);
+        mv.visitVarInsn(Opcodes.ISTORE, 1);
+        mv.visitIincInsn(2, 1);
+        mv.visitJumpInsn(Opcodes.GOTO, forLabel);
+
+        mv.visitLabel(label);
+        mv.visitVarInsn(Opcodes.ILOAD, 1);
+        mv.visitInsn(Opcodes.IRETURN);
+        mv.visitMaxs(4, 4);
     }
 
 }
